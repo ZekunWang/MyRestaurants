@@ -1,0 +1,308 @@
+* {
+  box-sizing: border-box;
+  margin:     0;
+  padding:    0;
+}
+
+body {
+  background:  #434343;
+  color:       #FFFFFF;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size:   0.9em;
+}
+
+ul {
+  list-style: none;
+}
+
+/**
+ * top header
+ */
+.top-header {
+  background:  #DF574B;
+  position:    fixed;  /*fix header when scoll down*/
+  top:         0;
+  height:      60px;
+  width:       100%;
+  /*display links at center*/
+  display:     flex;
+  align-items: center;
+  box-shadow:  0px 2px 10px #333333;  /*add shadow to header bar*/
+  z-index: 1;  /*set header to top layer so it will not be covered when scoll down*/
+}
+
+#avatar {
+  display: none;
+}
+
+.avatar {
+  background:    #FFFFFF;
+  border-radius: 50%;
+  color:         #333C4D;
+  height:        40px;
+  width:         40px;
+  padding-left:  9px;
+  padding-top:   5px;
+  margin-right:  20px;
+}
+
+/**
+ * top navigation
+ */
+.top-nav {
+  flex: 1;
+}
+
+.top-nav a {
+  color:           #F9F9F9;
+  text-decoration: none;  /*remove underline*/
+  margin-left:     20px;
+  font-weight:     400;
+}
+
+#welcome-msg {
+  border-right:  1px solid #FFFFFF;
+  display:       none;
+  padding-right: 10px;
+}
+
+#logout-link {
+  color:           #F9F9F9;
+  display:         none;
+  font-weight:     400;
+  padding:         0 10px;
+  text-decoration: none;
+}
+/**
+ * main container
+ */
+.container {
+  min-width:  600px;
+  max-width:  1000px;
+  margin:     60px auto;/*leave 60px for top-header*/
+}
+
+/**
+ * main header
+ */
+.container > header {
+  height:	   250px;
+  /*set content to be flexible*/
+  display:         flex;
+  align-items:     center;
+  background:      url('http://prophoto.com.cy/wp-content/galleries/food/food-restaurant-photographer-cyprus-10.jpg') no-repeat 50% 50%;
+  background-size: 100%;
+}
+
+.container > header p {
+  margin-left:  220px;
+  font-size:    2em;
+  border-left:  1px solid #FFFFFF;
+  /*set line height to limit line space*/
+  line-height:  1em;
+  padding-left: 5px;
+  font-weight:  400;
+}
+
+.container > header p span {
+  color: #FBAF41;
+}
+
+/**
+ * login form
+ */
+#login-form {
+  color: #624630;
+  margin: 0px auto;
+  overflow: auto;
+  padding: 40px;
+  width: 300px;
+}
+
+#login-form label {
+  display: block;
+}
+
+#login-form input {
+  border: none;
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+}
+
+#login-form button {
+  cursor: pointer;
+  float: right;
+  padding: 8px 20px;
+  text-align: right;
+}
+
+#login-error {
+  clear: both;
+  color: #990000;
+  padding-top: 10px;
+}
+
+/**
+ * main section
+ */
+.main-section {
+  background: #F3BB43;
+}
+
+/**
+ * aside
+ */
+.main-section aside {
+  display: none;
+  float: left;
+  width: 180px;
+}
+
+.main-section aside .nav-icon {
+  text-align: center;
+  padding:    20px;
+  color:      #624630;
+}
+
+/**
+ * main navigation
+ */
+.main-nav-btn {
+  /*each element will be in a single line*/
+  display:         block;
+  border-top:      1px solid #FFFFFF;
+  padding:         20px;
+  color:           #FFFFFF;
+  text-decoration: none;
+}
+
+.main-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.8);
+  color:      #624630;
+}
+
+.main-nav-btn.active {
+  background: #F2EBD9;
+  color:      #624630;
+}
+
+.main-nav-btn i {
+  width: 20px;
+}
+
+/**
+ * restaurant list
+ */
+#restaurant-list {
+  color:       #624630;
+  display:     none;
+  margin-left: 180px;
+  background:  #F2EBD9;
+  min-height:  250px;
+  padding:     10px;
+}
+
+#restaurant-list .notice {
+  font-size:  16px;
+  padding:    60px;
+  text-align: center;
+}
+
+/**
+ * restaurant
+ */
+.restaurant {
+  /*put elements in a line*/
+  display:       flex;
+  margin:        10px;
+  padding:       15px;
+  border-bottom: 1px solid #FFFFFF;
+  align-items:   center;
+  /*unhover background-color change effect*/
+  transition: background-color 150ms linear;
+}
+
+.restaurant:last-child {
+  /*remove bottom border of the last child*/
+  border: none;
+}
+
+.restaurant:hover {
+  background: rgba(255, 255, 255, 0.8);
+  /*hover background-color change effect*/
+  transition: background-color 150ms linear;
+}
+
+.restaurant img {
+  border: 1px solid #FFFFFF;
+  width:  80px;
+  height: 80px;
+}
+
+.restaurant > div:first-of-type {
+  flex:         1;
+  margin-left:  10px;
+  margin-right: 10px;
+}
+
+.restaurant-name {
+  color:           #624630;
+  font-weight:     400;
+  text-decoration: none;
+}
+
+.restaurant-name:hover {
+  text-decoration: underline;
+}
+
+.stars {
+  display: flex;
+  padding-top: 10px;
+}
+
+.restaurant-address {
+  text-align:    right;
+  line-height:   20px;
+  padding-right: 20px;
+}
+
+.fav-link {
+  border-left: 1px solid #FFFFFF;
+  line-height: 60px;
+  width:       60px;
+  text-align:  center;
+  cursor:      pointer;
+}
+
+.fav-link:hover {
+  color: #F13F3F;
+}
+
+/**
+ * footer section
+ */
+footer {
+  height:    200px;
+  font-size: 0.8em;
+}
+
+footer p {
+  text-align: center;
+}
+
+footer .title {
+  font-size: 1.2em;
+  padding:   15px;
+}
+
+footer ul {
+  display: flex;
+  padding: 20px;
+}
+
+footer ul li {
+  flex: 1;
+}
