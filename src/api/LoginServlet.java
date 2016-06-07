@@ -54,7 +54,6 @@ public class LoginServlet extends HttpServlet {
 	   		 // TODO Auto-generated catch block
 	   		 e.printStackTrace();
 	   	 }
-
 	}
 
 	/**

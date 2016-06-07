@@ -72,7 +72,22 @@ public interface DBConnection {
      * @return
      */
     public JSONArray searchRestaurants(String userId, double lat, double lon);
-
+    
+    /**
+     * Verify if the userId exist.
+     * @param userId
+     * @return
+     */
+    public Boolean verifyUserId(String userId);
+    
+    /**
+     * Signup for the userId and password if userId not exist.
+     * @param userId
+     * @param password
+     * @return
+     */
+    public Boolean signupLogin(String userId, String password, String firstName, String lastName);
+    
    /**
      * Verify if the userId matches the password.
      * @param userId

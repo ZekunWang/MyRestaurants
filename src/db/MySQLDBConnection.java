@@ -74,6 +74,49 @@ public class MySQLDBConnection implements DBConnection {
 	}
 
 	@Override
+	public Boolean verifyUserId(String userId) {
+		try {
+			if (conn == null) {
+				return false;
+			}
+			String sql = "SELECT user_id from users WHERE user_id=?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString( 1, userId);  
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
+	
+	@Override
+	public Boolean signupLogin(String userId, String password, 
+			String firstName, String lastName) {
+		try {
+			if (conn == null) {
+				return false;
+			}
+			if (!verifyUserId(userId)) {
+				String sql = "INSERT INTO users VALUES (?,?,?,?)";
+				PreparedStatement pstmt = conn.prepareStatement( sql );
+				pstmt.setString( 1, userId); 
+				pstmt.setString( 2, password);
+				pstmt.setString( 3, firstName); 
+				pstmt.setString( 4, lastName); 
+				pstmt.executeUpdate();
+				return true;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
+	
+	@Override
 	public Boolean verifyLogin(String userId, String password) {
 		try {
 			if (conn == null) {

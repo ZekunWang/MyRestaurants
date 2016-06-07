@@ -13,6 +13,7 @@ var lat           = 37.38;
  */
 function init() {
 	// register event listeners
+    $('login-switch').addEventListener('click', toSignup);
     $('login-btn').addEventListener('click', login);
 	$('nearby-btn').addEventListener('click', loadNearbyRestaurants);
 	$('fav-btn').addEventListener('click', loadFavoriteRestaurants);
@@ -111,11 +112,111 @@ function onLoadPositionFailed() {
 }
 
 //-----------------------------------
+//  Signup
+//-----------------------------------
+
+function toSignup() {
+	clearLoginError();
+	$('username').value = '';
+	$('password').value = '';
+	$('firstName').value = '';
+	$('lastName').value = '';
+    var loginSwitch = $('login-switch');
+    var loginBtn = $('login-btn');
+    var signupInfo = $('signupInfo');
+    showElement(signupInfo);
+    // change text
+    loginSwitch.innerHTML = 'Login';
+    loginBtn.innerHTML = 'Signup';
+    // remove events
+    loginSwitch.removeEventListener('click', toSignup);
+    loginBtn.removeEventListener('click', login);
+    // add new events
+    loginSwitch.addEventListener('click', toLogin);
+    loginBtn.addEventListener('click', signup);
+}
+  
+function signup() {
+	var username = $('username').value;
+	var password = $('password').value;
+	var firstName = $('firstName').value;
+	var lastName = $('lastName').value;
+	
+	if (username === '') {
+    	showSignupError('username');
+    	return;
+	} else if (password === '') {
+	    showSignupError('password');
+    	return;
+	} else if (firstName === '') {
+	    showSignupError('firt name');
+    	return;
+	} else if (lastName === '') {
+	    showSignupError('last name');
+    	return;
+	}
+	
+	password = md5(username + md5(password));
+	  
+	//The request parameters
+	var url = './SignupServlet';
+	var req = JSON.stringify({
+		user_id: username,
+		password: password,
+		firstName: firstName,
+		lastName: lastName
+	});
+
+	ajax('POST', url, req,
+		// successful callback
+		function (res) {
+	    	var result = JSON.parse(res);
+	      
+	    	// successfully logged in
+	    	if (result.status === 'OK') {
+	    		toLogin();
+	    		showSignupSuccess();
+	    	}
+	    },
+	    // error
+	    function () {
+	    	showSignupError('signup');
+		}
+	);
+}
+
+function showSignupSuccess() {
+    $('login-error').innerHTML = 'Signup Successful';
+}
+
+function showSignupError(msg) {
+    $('login-error').innerHTML = 'Invalid ' + msg;
+}
+  
+//-----------------------------------
 //  Login
 //-----------------------------------
 
+function toLogin() {
+	clearLoginError();
+	$('username').value = '';
+	$('password').value = '';
+    var loginSwitch = $('login-switch');
+    var loginBtn = $('login-btn');
+    var signupInfo = $('signupInfo');
+    hideElement(signupInfo);
+    // change text
+    loginSwitch.innerHTML = 'Signup';
+    loginBtn.innerHTML = 'Login';
+    // remove events
+    loginSwitch.removeEventListener('click', toLogin);
+    loginBtn.removeEventListener('click', signup);
+    // add new events
+    loginSwitch.addEventListener('click', toSignup);
+    loginBtn.addEventListener('click', login);
+}
+  
 function login() {
-  //console.log("login button pressed");
   var username = $('username').value;
   var password = $('password').value;
   password = md5(username + md5(password));

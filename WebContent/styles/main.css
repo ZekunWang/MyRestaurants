@@ -132,16 +132,26 @@ ul {
   width: 100%;
 }
 
+#login-form #signupInfo {
+  display: none;
+}
+
+#login-form a {
+  float: right;
+  padding: 8px 10px;
+}
+
 #login-form button {
   cursor: pointer;
   float: right;
   padding: 8px 20px;
-  text-align: right;
+  width: 84px;
 }
 
 #login-error {
   clear: both;
   color: #990000;
+  font-size: 20px;
   padding-top: 10px;
 }
 
