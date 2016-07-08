@@ -135,8 +135,10 @@ public class MySQLDBConnection implements DBConnection {
 				return true;
 			}
 		} catch (Exception e) {
+			System.out.println("found error");
 			System.out.println(e.getMessage());
 		}
+		System.out.println("false");
 		return false;
 	}
 
