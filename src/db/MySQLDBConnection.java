@@ -135,10 +135,8 @@ public class MySQLDBConnection implements DBConnection {
 				return true;
 			}
 		} catch (Exception e) {
-			System.out.println("found error");
 			System.out.println(e.getMessage());
 		}
-		System.out.println("false");
 		return false;
 	}
 
@@ -146,9 +144,13 @@ public class MySQLDBConnection implements DBConnection {
 	public String getFirstLastName(String userId) {
 		String name = "";
 		try {
-			if (conn != null) {
-				String sql = "SELECT first_name, last_name from users WHERE user_id='" + userId + "'";
-				ResultSet rs = executeFetchStatement(sql);
+			if (conn != null) { 
+				//String sql = "SELECT first_name, last_name from users WHERE user_id='" + userId + "'";
+				//ResultSet rs = executeFetchStatement(sql);
+				String sql = "SELECT first_name, last_name from users WHERE user_id=?";
+				PreparedStatement pstmt = conn.prepareStatement( sql );
+				pstmt.setString( 1, userId);
+				ResultSet rs = pstmt.executeQuery();
 				if (rs.next()) {
 					name += rs.getString("first_name") + " " + rs.getString("last_name");
 				}
@@ -208,7 +210,7 @@ public class MySQLDBConnection implements DBConnection {
 	public Set<String> getVisitedRestaurants(String userId) {
 		Set<String> visitedRestaurants = new HashSet<String>();
 		try {
-			String sql = "SELECT business_id from history WHERE user_id=" + userId;
+			String sql = "SELECT business_id from history WHERE user_id='" + userId + "'";
 			ResultSet rs = executeFetchStatement(sql);
 			while (rs.next()) {
 				String visitedRestaurant = rs.getString("business_id");

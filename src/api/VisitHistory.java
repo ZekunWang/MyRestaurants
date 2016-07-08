@@ -89,7 +89,6 @@ public class VisitHistory extends HttpServlet {
 	   			}
 	   			if (connection.setVisitedRestaurants(userId, visitedRestaurants)) {
 	   				RpcParser.writeOutput(response, new JSONObject().put("status", "OK"));
-	   				System.out.println("OK");///////////////
 	   			} else {
 		   			RpcParser.writeOutput(response, new JSONObject().put("status", "InvalidParameter"));
 	   			}
